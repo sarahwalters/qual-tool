@@ -1,0 +1,3 @@
+- Single-line responses desirable, or is preserving the multi-line-ness important?
+- Zero-index or one-index?
+- How should search work?
