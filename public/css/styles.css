@@ -1,0 +1,41 @@
+body {
+	padding: 20px;
+}
+
+#search,
+#fullFile {
+	display: flex;
+}
+
+#search p,
+#fullFile p {
+	margin: 0;
+}
+
+#search input,
+#fullFile input {
+	margin: 5px 15px 5px 0;
+}
+
+#search button,
+#fullFile button {
+	margin: 5px 0;
+	height: 21px;
+}
+
+.formLabel {
+	margin: 20px 0 5px 0;
+}
+
+.formValidation {
+	color: red;
+	margin: 5px 0 20px 0;
+}
+
+ul {
+	padding: 0 20px;
+}
+
+.highlighted {
+	background-color: yellow;
+}

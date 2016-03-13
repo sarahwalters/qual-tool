@@ -72,7 +72,7 @@ router.get('/:filename/:line', function(req, res, next) {
 			});
 		} else {
 			res.status(422).json({
-				error: 'line number out of range'
+				error: 'Line number out of range'
 			});
 		}
 	});

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs">
+	<head>
+		<meta charset="utf-8">
+		<title>Qual Tool</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<script src="/js/app.js"></script>
+		<script src="/js/controllers/searchController.js"></script>
+		<script src="/js/filters/highlightFilter.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+	</head>
+
+	<body ng-app="qualTool">
+		<div ng-controller="SearchController">
+			<p class="formLabel">Read a full file:</p>
+			<div id="fullFile">
+				<p>Filename: <input ng-model="filename" ng-keyup="$event.keyCode == 13 && getFile()"></input></p>
+				<button ng-click="getFile()">Get File</button>
+			</div>
+			<p class="formValidation">{{getFileValidationMsg}}</p>
+
+			<p class="formLabel">Search by speaker and/or keyword:</p>
+			<div id="search">
+				<p>Speaker: <input ng-model="speaker" ng-keyup="$event.keyCode == 13 && search()"></input></p>
+				<p>Keyword: <input ng-model="keyword" ng-keyup="$event.keyCode == 13 && search()"></input></p>
+				<button ng-click="search()">Search</button>
+			</div>
+			<p class="formValidation">{{searchValidationMsg}}</p>
+
+			<ul>
+				<li ng-if="lines.length > 0" ng-repeat="line in lines" class="{{line._id}}">
+					<p>{{line.filename}}, line {{line.lineNumber}}</p>
+					<p>{{line.speaker}}: <span ng-bind-html="line.body | highlight:executedKeyword"></span></p>
+				</li>
+				<li ng-if="lines.length === 0">No results.</li>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -1,3 +1,3 @@
 - Single-line responses desirable, or is preserving the multi-line-ness important?
 - Zero-index or one-index?
-- How should search work?
+- How should search work? What kind of inputs? What kind of sorting?

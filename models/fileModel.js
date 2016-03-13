@@ -22,9 +22,14 @@ fileSchema.statics.findOneOrCreate = function (filename, callback) {
     				callback(err, null);
     			} else {
     				// Save the line objects to db
-	    			var saveLinePromises = _.map(parsedFile, function(aLine) {
+	    			var saveLinePromises = _.map(parsedFile, function(aLine,index) {
 	    				return new q(function(resolve, reject) {
-							new Line(aLine).save(function(err, savedLine) {
+							new Line({
+								filename: filename,
+								lineNumber: index + 1, // one-indexed
+								speaker: aLine.speaker,
+								body: aLine.body
+							}).save(function(err, savedLine) {
 								if (err) {
 									reject(err);
 								} else {

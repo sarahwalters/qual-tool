@@ -1,33 +1,28 @@
+var _ = require('underscore');
 var express = require('express');
 var router = express.Router();
 
 var Line = require('../models/lineModel');
 
-router.get('/speaker/:name', function(req, res, next) {
-	Line.find({speaker: new RegExp(req.params.name, 'i')}, function(err, lines) {
-		res.json({
-			lines: lines
-		});
-	});
-});
+/* GET the lines which match the specified params
+ * /api/search?querystring
+ * querystring can include:
+ * @param {string} speaker: the name of the speaker to match for (e.g 'jon' or 'lynn')
+ * @param {string} keyword: the keyword to match for in the response bodies
+ */
+router.get('/', function(req, res, next) {
+	var query = {};
+	if (req.query.speaker) query.speaker = new RegExp(req.query.speaker, 'i');
+	if (req.query.keyword) query.body = new RegExp(req.query.keyword, 'i');
 
-router.get('/body/:keyword', function(req, res, next) {
-	Line.find({body: new RegExp(req.params.keyword, 'i')}, function(err, lines) {
-		res.json({
-			lines: lines
-		});
-	});
-});
-
-router.get('/speaker/:name/body/:keyword', function(req, res, next) {
-	var query = {
-		speaker: new RegExp(req.params.name, 'i'),
-		body: new RegExp(req.params.keyword, 'i')
-	};
-	Line.find(query, function(err, lines) {
-		res.json({
-			lines: lines
-		});
+	Line.findSorted(query, function(err, lines) {
+		if (err) {
+			res.status(500).json(error);
+		} else {
+			res.status(200).json({
+				lines: lines
+			});
+		}
 	});
 });
 

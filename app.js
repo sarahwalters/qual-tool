@@ -11,7 +11,7 @@ var searchRoutes = require('./routes/search');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(process.env.MONGOURI || 'mongodb://localhost/test');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

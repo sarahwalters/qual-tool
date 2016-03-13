@@ -15,7 +15,7 @@ fileUtil.readAndParse = function(filepath, callback) {
 		var parsedData = error ? null : dataUtil.parseSpeakers(data);
 		var err = error ? {
 			code: 422,
-			msg: 'invalid filename'
+			msg: 'Invalid filename'
 		} : null;
         callback(err, parsedData);
     });
